@@ -1,0 +1,15 @@
+model:
+  name: microsoft/phi-2
+
+training:
+  batch_size: 2
+  epochs: 2
+  max_length: 256
+
+data:
+  train_samples: 500
+
+paths:
+  raw_data: data/raw/
+  processed_data: data/processed/
+  model_path: models/sg_model/
