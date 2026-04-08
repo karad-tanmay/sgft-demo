@@ -18,3 +18,21 @@ install the required dependencies:
 ```bash
 pip install -r requirements.txt
 ```
+create a .env file in root directory, refer to env_sample.txt
+
+## Usage
+
+create the data/raw dir:
+```bash
+mkdir -p data/raw
+```
+
+execute the data downloading script:
+```bash
+python3 -m src.data.download_data
+```
+
+execute the data processing script: (processed data already being pushed to repo, so this step can be skipped)
+```bash
+python3 -m src.data.process_data
+```

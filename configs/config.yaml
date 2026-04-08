@@ -1,15 +1,28 @@
 model:
-  name: microsoft/phi-2
+  name: microsoft/phi-2 # to be chnaged
+
+models:
+  gemini:
+    - models/gemini-2.5-flash
+    - models/gemini-2.5-flash-lite
+    - models/gemini-flash-lite-latest
+    - models/gemini-flash-latest
 
 training:
   batch_size: 2
   epochs: 2
   max_length: 256
 
-data:
-  train_samples: 500
-
 paths:
   raw_data: data/raw/
   processed_data: data/processed/
   model_path: models/sg_model/
+
+data:
+  input_file: data/raw/gsm8k_train.json
+  output_file: data/processed/sg_dataset.json
+  num_samples: 3000
+
+generation:
+  sleep_per_request: 3
+  sleep_on_exhaust: 60
