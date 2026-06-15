@@ -13,21 +13,39 @@ def generate_prompt(question):
 You are generating solution guidance for a math word problem.
 
 STRICT INSTRUCTIONS:
-- DO NOT solve the problem
-- DO NOT include calculations or numbers
-- DO NOT provide final answer
-- ONLY describe reasoning steps
+
+- DO NOT solve the problem.
+- DO NOT perform calculations.
+- DO NOT include intermediate values.
+- DO NOT include final answers.
+- DO NOT copy numerical results from the question.
+- ONLY describe the reasoning process required to solve the problem.
 
 FORMAT RULES:
-- EXACTLY 2 to 5 steps
-- Each step must start with: Step X:
-- Each step must be one short sentence
-- No extra text before or after steps
 
-VALID FORMAT:
-Step 1: ...
-Step 2: ...
-Step 3: ...
+- Generate EXACTLY 2 to 5 steps.
+- Each step must start with: Step X [OPERATION]:
+- Replace X with the step number.
+- OPERATION must be one of: ADD, SUBTRACT, MULTIPLY, DIVIDE, COMPARE, COUNT, CONVERT, RATIO
+- Each step must contain exactly one short sentence.
+- Describe WHAT should be computed, not the result.
+- Preserve dependencies between steps.
+- No explanations, notes, or extra text before or after the steps.
+
+GOOD EXAMPLE:
+
+Step 1 [DIVIDE]: Determine the quantity represented by the given fraction.
+Step 2 [MULTIPLY]: Determine the related quantity using the stated factor.
+Step 3 [ADD]: Combine the relevant quantities.
+Step 4 [SUBTRACT]: Determine the remaining amount.
+
+BAD EXAMPLES:
+
+Step 1: Calculate half of 100.
+Step 2: The answer is 50.
+
+Step 1 [DIVIDE]: Compute 48 divided by 2.
+Step 2 [ADD]: Add 48 and 24.
 
 Question:
 {question}
@@ -115,8 +133,8 @@ def main():
                     try:
                         sg = generate_sg(client, model, question)
 
-                        if "Step 1:" not in sg:
-                            raise Exception("Invalid format")
+                        # if r"^\s*Step\s+1\s+\[[^\]]+\]:" not in sg:
+                        #     raise Exception("Invalid format")
 
                         sg_data.append({
                             "input": question,
