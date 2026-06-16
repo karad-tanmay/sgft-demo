@@ -22,17 +22,17 @@ create a .env file in root directory, refer to env_sample.txt
 
 ## Usage
 
-create the data/raw dir:
+create the data/raw dir: (if not already present)
 ```bash
 mkdir -p data/raw
 ```
 
-execute the data downloading script:
+execute the data downloading script: (original dataset already being pushed to repo, so this step can be skipped)
 ```bash
 python3 -m src.data.download_data
 ```
 
 execute the data processing script: (processed data already being pushed to repo, so this step can be skipped)
 ```bash
-python3 -m src.data.process_data
+python3 -m src.data.generate_sg
 ```
