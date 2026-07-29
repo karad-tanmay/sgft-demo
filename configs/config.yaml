@@ -1,12 +1,15 @@
 model:
-  name: microsoft/phi-2 # to be chnaged
+  planner_model_path: models/sg_model/Llama-3.2-1B/merged_model
+  executor_model_path: models/base_model/Qwen2.5-1.5B-Instruct
 
 models:
   gemini:
     - models/gemini-2.5-flash
-    - models/gemini-2.5-flash-lite
+    # - models/gemini-2.5-flash-lite
     - models/gemini-flash-lite-latest
     - models/gemini-flash-latest
+    - models/gemini-3-flash-preview
+    - models/gemini-3.1-flash-lite
 
 training:
   batch_size: 2
@@ -20,8 +23,20 @@ paths:
 
 data:
   input_file: data/raw/gsm8k_train.json
-  output_file: data/processed/sg_dataset_new.json
+  output_file: data/processed/sg_dataset_improv.json
   num_samples: 10000
+
+  gsm8k_test_file: data/raw/gsm8k_test.json
+  accuracy_csv: data/processed/pipeline_accuracy.csv
+
+evaluation:
+  num_samples: 100
+
+  planner_max_tokens: 192
+  executor_max_tokens: 512
+
+  planner_temperature: 0.0
+  executor_temperature: 0.0
 
 generation:
   sleep_per_request: 3
